@@ -1,6 +1,7 @@
 package com.domain.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,11 @@ public class ProductService {
     }
 
     public Product findOne(Long id) {
-        return productRepo.findById(id).get(); // productRepo adalah sebuat object repository
+        Optional<Product> product = productRepo.findById(id);
+        if(!product.isPresent()) {
+            return null;
+        }
+        return product.get(); // productRepo adalah sebuat object repository
     }
 
     public Iterable<Product> findAll() {

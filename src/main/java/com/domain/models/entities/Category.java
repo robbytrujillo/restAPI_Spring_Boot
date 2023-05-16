@@ -1,5 +1,7 @@
 package com.domain.models.entities;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import jakarta.persistence.Table;
 
 @Entity 
 @Table(name="tbl_categories")
-public class Category {
+public class Category implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     @Id // agar jadi primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto inchirement

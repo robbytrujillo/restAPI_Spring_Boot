@@ -2,11 +2,14 @@ package com.domain.models.entities;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.ManyToAny;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -31,6 +34,9 @@ public class Product implements Serializable{
     private String description;
 
     private double price;
+
+    @ManyToOne
+    private Category category;
 
     public Product() {
     }

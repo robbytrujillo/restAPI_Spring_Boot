@@ -1,17 +1,19 @@
 package com.domain.models.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_suppliers")
-public class Supplier implements Serializable{
+public class Supplier implements Serializable{ // tambahkan Serializable
 
     private static final long serialVersionUID = 1L;
 
@@ -27,6 +29,17 @@ public class Supplier implements Serializable{
     
     @Column(length = 100, nullable = false, unique = true)
     private String email;
+
+    @ManyToMany
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    private Set<Product> products;
 
     public Long getId() {
         return id;

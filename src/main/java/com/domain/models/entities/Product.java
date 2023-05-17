@@ -1,6 +1,7 @@
 package com.domain.models.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -9,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
@@ -38,6 +40,9 @@ public class Product implements Serializable{
     @ManyToOne
     private Category category;
 
+    @ManyToMany
+    private Set<Supplier> suppliers;
+
     public Product() {
     }
 
@@ -46,6 +51,14 @@ public class Product implements Serializable{
         this.name = name;
         this.description = description;
         this.price = price;
+    }
+
+    public Set<Supplier> getSuppliers() {
+        return suppliers;
+    }
+
+    public void setSuppliers(Set<Supplier> suppliers) {
+        this.suppliers = suppliers;
     }
 
     public Long getId() {

@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -41,6 +43,10 @@ public class Product implements Serializable{
     private Category category;
 
     @ManyToMany
+    @JoinTable(
+        name = "tbl_product_supplier", 
+        joinColumns = @JoinColumn(name = "product_id"), 
+        inverseJoinColumns = @JoinColumn(name = "supplier_id"))
     private Set<Supplier> suppliers;
 
     public Product() {

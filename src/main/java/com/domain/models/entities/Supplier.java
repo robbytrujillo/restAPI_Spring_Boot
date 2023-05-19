@@ -30,7 +30,9 @@ public class Supplier implements Serializable{ // tambahkan Serializable
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "suppliers")
+    private Set<Product> products;
+
     public Set<Product> getProducts() {
         return products;
     }
@@ -38,8 +40,6 @@ public class Supplier implements Serializable{ // tambahkan Serializable
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
-
-    private Set<Product> products;
 
     public Long getId() {
         return id;

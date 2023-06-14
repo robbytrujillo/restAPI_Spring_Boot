@@ -1,5 +1,6 @@
 package com.domain.controllers;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,10 @@ public class SupplierController {
 
     @Autowired
     private SupplierService supplierService;
+
+    //tambahkan object modelMapper
+    @Autowired
+    private ModelMapper modelMapper;
     
     public ResponseEntity<ResponseData<Supplier>> create(@Valid @RequestBody SupplierData supplierData, Errors errors) {
         ResponseData<Supplier> responseData = new ResponseData<>();
@@ -34,10 +39,7 @@ public class SupplierController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
          }
 
-         Supplier supplier = new Supplier();
-         supplier.setName(supplierData.getName());
-         supplier.setAddress(supplierData.getAddress());
-         supplier.setEmail(supplierData.getEmail());
+         Supplier supplier = modelMapper.map(supplierData, Supplier.class);
 
          responseData.setStatus((true));
          responseData.setPayload(supplierService.save(supplier));
